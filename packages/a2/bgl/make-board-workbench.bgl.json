@@ -1,0 +1,44 @@
+{
+  "title": "make-board-workbench",
+  "description": "A blank board. Use it as a starting point for your creations.",
+  "version": "0.0.1",
+  "nodes": [
+    {
+      "id": "a2-c818806e",
+      "type": "file://bgl/a2.bgl.json#module:Make-Board",
+      "metadata": {
+        "title": "Make Board",
+        "visual": {
+          "x": 300,
+          "y": 180,
+          "collapsed": "expanded",
+          "outputHeight": 88
+        },
+        "logLevel": "info"
+      },
+      "configuration": {
+        "description": {
+          "parts": [
+            {
+              "text": "An app about kittens"
+            }
+          ],
+          "role": "user"
+        }
+      }
+    }
+  ],
+  "edges": [],
+  "assets": {
+    "@@thumbnail": {
+      "metadata": {
+        "title": "Thumbnail",
+        "type": "file"
+      },
+      "data": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI1MCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8cmVjdCB4PSIxMC4wMCIKICAgICAgICAgICAgICAgICAgICB5PSIxNi44NSIKICAgICAgICAgICAgICAgICAgICB3aWR0aD0iMjMwLjAwIgogICAgICAgICAgICAgICAgICAgIGhlaWdodD0iMTY2LjMxIgogICAgICAgICAgICAgICAgICAgIHJ4PSIzLjUiCiAgICAgICAgICAgICAgICAgICAgZmlsbD0id2hpdGUiCiAgICAgICAgICAgICAgICAgICAgc3Ryb2tlPSIjNzc1N2Q5IiAvPgogICAgICAKICAgIDwvc3ZnPg=="
+    }
+  },
+  "metadata": {
+    "visual": {}
+  }
+}
