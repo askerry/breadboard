@@ -280,6 +280,18 @@
         "description": "Add a description for your module here.",
         "runnable": false
       }
+    },
+    "google-rpc": {
+      "code": "/**\n * @fileoverview Utilities to interact with the internal AppCatalyst RPC service.\n */\nimport secrets from \"@secrets\";\nimport fetch from \"@fetch\";\nimport { ok } from \"./utils\";\nexport { generateApp };\nasync function endpointURL(endpoint) {\n    const $metadata = {\n        title: \"Get GEMINI_KEY\",\n        description: \"Getting GEMINI_KEY from secrets\",\n    };\n    const key = await secrets({ $metadata, keys: [\"GEMINI_KEY\"] });\n    return `https://staging-appcatalyst.sandbox.googleapis.com/v1beta1/${endpoint}??key=${key.GEMINI_KEY}`;\n}\n/**\n * @fileoverview Returns a board BGL file for the provided application intent.\n * NoteThis will be updated to a multi-turn chat formulation in following update.\n */\nasync function generateApp(intent) {\n    const fetching = await fetch({\n        // TODO: update this to generateBoard when rollout is done.\n        url: await endpointURL(\"generateApp\"),\n        method: \"POST\",\n        headers: {\n            \"Content-Type\": \"application/json\",\n            _csrf: \"DSs5m9ku-PwFoVlRo1UmVapUw-km1afn3k_w'\",\n        },\n        body: {\n            intent: intent,\n        },\n    });\n    if (!ok(fetching)) {\n        return fetching;\n    }\n    return fetching.response;\n}\n",
+      "metadata": {
+        "title": "google-rpc",
+        "source": {
+          "code": "/**\n * @fileoverview Utilities to interact with the internal AppCatalyst RPC service.\n */\nimport secrets from \"@secrets\";\nimport fetch from \"@fetch\";\n\nimport { ok } from \"./utils\";\n\nexport { generateApp };\n\nasync function endpointURL(endpoint: string): Promise<string> {\n  const $metadata = {\n    title: \"Get GEMINI_KEY\",\n    description: \"Getting GEMINI_KEY from secrets\",\n  };\n  const key = await secrets({ $metadata, keys: [\"GEMINI_KEY\"] });\n  return `https://staging-appcatalyst.sandbox.googleapis.com/v1beta1/${endpoint}??key=${key.GEMINI_KEY}`;\n}\n\n/**\n * @fileoverview Returns a board BGL file for the provided application intent. \n * NoteThis will be updated to a multi-turn chat formulation in following update.\n */\nasync function generateApp(intent: string): Promise<Outcome<string>> {\n  const fetching = await fetch({\n    // TODO: update this to generateBoard when rollout is done.\n    url: await endpointURL(\"generateApp\"),\n    method: \"POST\",\n    headers: {\n      \"Content-Type\": \"application/json\",\n      _csrf: \"DSs5m9ku-PwFoVlRo1UmVapUw-km1afn3k_w'\",\n    },\n    body: {\n      intent: intent,\n    },\n  });\n  if (!ok(fetching)) {\n    return fetching;\n  }\n  return fetching.response as string;\n}\n",
+          "language": "typescript"
+        },
+        "description": "Utilities to interact with the internal AppCatalyst RPC service.",
+        "runnable": false
+      }
     }
   },
   "exports": [
