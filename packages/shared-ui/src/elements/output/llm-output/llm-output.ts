@@ -351,12 +351,12 @@ export class LLMOutput extends LitElement {
 
     return this.value && this.value.parts.length
       ? html` ${this.showExportControls
-          ? html`<bb-export-toolbar
+        ? html`<bb-export-toolbar
               .supported=${this.supportedExportControls}
               .value=${this.value}
               .graphUrl=${this.graphUrl}
             ></bb-export-toolbar>`
-          : nothing}
+        : nothing}
         ${map(this.value.parts, (part, idx) => {
           let value: TemplateResult | symbol = nothing;
           if (isTextCapabilityPart(part)) {
@@ -394,22 +394,22 @@ export class LLMOutput extends LitElement {
                         <img src="${url}" alt="LLM Image" />
                         <button
                           @click=${async () => {
-                            const data = await fetch(url);
-                            const imageData = await data.blob();
+                        const data = await fetch(url);
+                        const imageData = await data.blob();
 
-                            await navigator.clipboard.write([
-                              new ClipboardItem({
-                                [part.inlineData.mimeType]: imageData,
-                              }),
-                            ]);
+                        await navigator.clipboard.write([
+                          new ClipboardItem({
+                            [part.inlineData.mimeType]: imageData,
+                          }),
+                        ]);
 
-                            this.dispatchEvent(
-                              new ToastEvent(
-                                "Copied image to Clipboard",
-                                ToastType.INFORMATION
-                              )
-                            );
-                          }}
+                        this.dispatchEvent(
+                          new ToastEvent(
+                            "Copied image to Clipboard",
+                            ToastType.INFORMATION
+                          )
+                        );
+                      }}
                         >
                           Copy image to clipboard
                         </button>
@@ -449,15 +449,19 @@ export class LLMOutput extends LitElement {
                           .audioFile=${audioFile}
                           .color=${colorLight}
                           style=${styleMap({
-                            "--color-button": colorMid,
-                            "--color-button-active": colorDark,
-                          })}
+                        "--color-button": colorMid,
+                        "--color-button-active": colorDark,
+                      })}
                         ></bb-audio-handler>
                       </div>`
                     );
                   });
 
                 return cache(html`${until(audioHandler)}`);
+              }
+              if (part.inlineData.mimeType.startsWith("text/html")) {
+                return cache(
+                  html`<iframe srcdoc="${part.inlineData.data}"></iframe>`);
               }
               if (part.inlineData.mimeType.startsWith("video")) {
                 return cache(html`<video src="${url}" controls />`);
@@ -589,9 +593,9 @@ export class LLMOutput extends LitElement {
           return html`<div class="content">
             <span
               class=${classMap({
-                value: true,
-                markdown: isTextCapabilityPart(part),
-              })}
+            value: true,
+            markdown: isTextCapabilityPart(part),
+          })}
               >${value}</span
             >
           </div>`;
